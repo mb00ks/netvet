@@ -1,0 +1,55 @@
+<div class="row">
+    <div class="col-12 col-md-12">
+      <div class="card">
+        <div class="card-header">
+          Appointments 1-{{appointmentsPerPage}} (Total:{{totalAppointmentsCount}})
+        </div>
+        <div class="card-body position-relative">
+          <div class="table-responsive cnstr-record companie-tbl">
+            <table class="table table-bordered heading-hvr">
+              <thead>
+                <tr>
+                  <th style="cursor: pointer;" [ngClass]="order =='AppointmentDate'? 'active':''"
+                    (click)="setOrder('AppointmentDate')" width="80">Appointment Date</th>
+                  <th style="cursor: pointer;" [ngClass]="order =='PetName'? 'active':''"
+                    (click)="setOrder('PetName')" width="75">Pet Name</th>
+                  <th [ngClass]="order =='OwnerName'? 'active':''" style="cursor: pointer;"
+                    (click)="setOrder('OwnerName')">Owner Name</th>
+                  <th [ngClass]="order =='ContactDetail'? 'active':''" style="cursor: pointer;"
+                    (click)="setOrder('ContractDetail')" width="75">Contact Detail</th>
+                  <th [ngClass]="order =='Id'? 'active':''" style="cursor: pointer; width:250px"
+                    (click)="setOrder('Id')">Appointment ID</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of appointments">
+                  <td>{{item.appointmentDateTime}}</td>
+                  <td>{{item.petName}}</td>
+                  <td>{{item.ownerName}}</td>
+                  <td>{{item.contactDetail}}</td>
+                  <td>{{item.appointmentId}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- Code by pagination -->
+          <div class="container mw-100">
+            <div class="row">
+              <div class="col-md-3"> </div>
+              <div *ngIf="appointments !=0" class="col-md-6">
+                <ul class="pagination justify-content-center">
+                  <li *ngFor="let page of pageField;let i=index" class="page-item">
+                    <a (click)="showAppointmentsByPageNumber(page,i)" [ngClass]="pageNumber[i] ? 'pageColor':'page-link'"
+                      style=" margin-right: 5px;;margin-top: 5px">{{page}}</a>
+                  </li>
+                </ul>
+                <div style="text-align: center;">
+                  Page {{currentPage}} of Total page {{appointmentService.exactPageList}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
